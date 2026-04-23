@@ -26,9 +26,9 @@ const variantStyles = {
 };
 
 const sizeStyles = {
-  sm: 'h-8 ps-2 pe-3 text-xs',
-  md: 'h-10 ps-4 pe-5 text-sm',
-  lg: 'h-12 ps-6 pe-6 text-base',
+  sm: 'py-2 px-3 text-xs',
+  md: 'py-2.5 px-3.5 text-sm',
+  lg: 'py-3 px-6 text-base',
   icon: 'h-9 w-9 grid place-items-center p-0'
 };
 
