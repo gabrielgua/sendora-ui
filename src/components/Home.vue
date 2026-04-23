@@ -7,11 +7,13 @@
           <h1 class="text-2xl font-bold tracking-tight">Meus Projetos</h1>
           <p class="mt-1 text-sm text-zinc-500 dark:text-zinc-400">Gerencie suas chaves de API e domínios.</p>
         </div>
-        <button
-          class="flex items-center gap-2 rounded-lg bg-zinc-900 dark:bg-zinc-100 px-4 py-2 text-sm font-medium text-white dark:text-zinc-900 shadow-sm transition-colors hover:bg-zinc-800 dark:hover:bg-zinc-200">
-          <Plus class="h-4 w-4" />
+        <Button>
+          <Plus class="h-4 w-4 mr-2" />
           Novo Projeto
-        </button>
+        </Button>
+
+
+
       </div>
 
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -85,6 +87,7 @@ import {
   Plus
 } from '@lucide/vue'
 import { reactive, ref } from 'vue'
+import Button from './Button.vue'
 
 
 
