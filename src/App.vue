@@ -12,7 +12,7 @@ import Sidebar from './components/Sidebar.vue';
     <div class="flex flex-1 flex-col">
       <Header />
 
-      <Container class="">
+      <Container>
         <RouterView />
       </Container>
     </div>

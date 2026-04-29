@@ -58,9 +58,8 @@ const latestProjects = computed(() => allProjects.value.slice(0, 3));
 </script>
 
 <template>
-  <Container tag="main" class="space-y-5 md:space-y-6 lg:space-y-8">
-
-    <section class="space-y-5">
+  <div class="space-y-8">
+    <section class="space-y-5 border p-8 rounded-xl border-zinc-200 dark:border-zinc-900">
       <PageTitle class="mb-5 md:mb-6 lg:mb-8">
         <template #title>
           <span class="flex items-center gap-2">
@@ -79,10 +78,8 @@ const latestProjects = computed(() => allProjects.value.slice(0, 3));
         <MetricCard v-for="stat in stats" :key="stat.label" v-bind="stat" />
       </section>
     </section>
-  </Container>
 
-  <section class="border-y rounded-t-2xl shadow-2xl border-y-zinc-200 dark:border-y-zinc-900">
-    <Container class="space-y-5">
+    <section class="space-y-5">
       <div class="flex items-center justify-between">
         <SectionTitle>
           <template #title>Projetos Recentes</template>
@@ -102,6 +99,6 @@ const latestProjects = computed(() => allProjects.value.slice(0, 3));
           :destination-email="project.destinationEmail" :apiKey="project.apiKey" :createdAt="project.createdAt"
           :active="project.active" />
       </div>
-    </Container>
-  </section>
+    </section>
+  </div>
 </template>

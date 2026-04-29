@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<Props>(), {
   showDetails: true
 });
 
-// Gera as iniciais caso não haja imagem
+// Gera iniciais caso não haja imagem
 const initials = computed(() => {
   return props.name
     .split(' ')
