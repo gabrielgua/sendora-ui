@@ -1,59 +1,107 @@
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import MetricCard from './MetricCard.vue';
+import ProjectCard from './ProjectCard.vue';
+import Button from './Button.vue';
+import { Plus, LayoutDashboard, ArrowRight } from '@lucide/vue';
+import Container from './Container.vue';
+import PageTitle from './PageTitle.vue';
+import Divider from './Divider.vue';
+import SectionTitle from './SectionTitle.vue';
+
+// Dados fake para métricas
+const stats = ref([
+  { label: 'E-mails Enviados', value: '128,432', icon: 'Send', trend: '12%', trendUp: true },
+  { label: 'Projetos Ativos', value: '14', icon: 'FolderKanban', trend: '2', trendUp: true },
+  { label: 'Taxa de Entrega', value: '99.2%', icon: 'ShieldCheck', trend: '0.1%', trendUp: true },
+  { label: 'Média de Latência', value: '142ms', icon: 'Zap', trend: '5ms', trendUp: false },
+]);
+
+// Lista completa (vinda de uma store ou API futuramente)
+const allProjects = ref([
+  {
+    id: 'nwx-01',
+    name: 'NWX Group Main',
+    destinationEmail: 'contato@nwxgroup.com',
+    active: true,
+    apiKey: 'mk_live_...',
+    createdAt: '28 Abr 2026'
+  },
+  {
+    id: 'store-22',
+    name: 'E-commerce Wiiva',
+    destinationEmail: 'vendas@wiiva.com.br',
+    active: true,
+    apiKey: 'mk_live_...',
+    createdAt: '25 Abr 2026'
+  },
+  {
+    id: 'lp-event',
+    name: 'Landing Page Verão',
+    destinationEmail: 'lead@campanha.com',
+    active: false,
+    apiKey: 'mk_live_...',
+    createdAt: '20 Abr 2026'
+  },
+  {
+    id: 'old-proj',
+    name: 'Projeto Antigo',
+    destinationEmail: 'old@mail.com',
+    active: true,
+    apiKey: 'mk_live_...',
+    createdAt: '01 Jan 2026'
+  }
+]);
+
+// Pegar apenas os 3 últimos
+const latestProjects = computed(() => allProjects.value.slice(0, 3));
+</script>
+
 <template>
-  <div class=" bg-zinc-50 dark:bg-zinc-950 font-sans text-zinc-900 dark:text-zinc-100">
+  <Container tag="main" class="space-y-5 md:space-y-6 lg:space-y-8">
 
-    <main class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-      <div class="mb-8 flex items-end justify-between">
-        <div>
-          <h1 class="text-2xl font-bold tracking-tight">Meus Projetos</h1>
-          <p class="mt-1 text-sm text-zinc-500 dark:text-zinc-400">Gerencie suas chaves de API e domínios.</p>
-        </div>
-        <Button>
-          <Plus class="h-4 w-4 mr-2" />
-          Novo Projeto
-        </Button>
+    <section class="space-y-5">
+      <PageTitle class="mb-5 md:mb-6 lg:mb-8">
+        <template #title>
+          <span class="flex items-center gap-2">
+            <LayoutDashboard class="h-8 w-8 text-zinc-400" />
+            Bem-vindo de volta, Gabriel!
+          </span>
+        </template>
+        <template #subtitle>
+          Aqui está o resumo da sua infraestrutura de e-mails.
+        </template>
+      </PageTitle>
 
+      <Divider />
 
+      <section class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <MetricCard v-for="stat in stats" :key="stat.label" v-bind="stat" />
+      </section>
+    </section>
+  </Container>
 
+  <section class="border-y rounded-t-2xl shadow-2xl border-y-zinc-200 dark:border-y-zinc-900">
+    <Container class="space-y-5">
+      <div class="flex items-center justify-between">
+        <SectionTitle>
+          <template #title>Projetos Recentes</template>
+        </SectionTitle>
+        <RouterLink to="/projects">
+          <Button variant="ghost" size="sm" class="group">
+            Ver todos os projetos
+            <ArrowRight class="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Button>
+        </RouterLink>
       </div>
 
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <ProjectCard v-for="project in projects" :key="project.id" :id="project.id" :name="project.name"
+      <Divider />
+
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <ProjectCard v-for="project in latestProjects" :key="project.id" :id="project.id" :name="project.name"
           :destination-email="project.destinationEmail" :apiKey="project.apiKey" :createdAt="project.createdAt"
           :active="project.active" />
       </div>
-    </main>
-  </div>
+    </Container>
+  </section>
 </template>
-
-<script setup lang="ts">
-import type { Project } from '@/types/project'
-import {
-  Plus
-} from '@lucide/vue'
-import { reactive, ref } from 'vue'
-import Button from './Button.vue'
-import ProjectCard from './ProjectCard.vue'
-
-
-const projects = reactive<Project[]>([
-  {
-    id: 'proj_1',
-    name: 'NWX Group',
-    destinationEmail: 'support@nwxgroup.com',
-    apiKey: 'mk_live_8f7d9a0b1c2e3f4g5h6i7j8k9l0m1n2',
-    createdAt: '23 Abr 2026',
-    active: true,
-  },
-  {
-    id: 'proj_2',
-    name: 'Landing Page Evento',
-    destinationEmail: 'help@evento.nwxgroup.com',
-    apiKey: 'mk_live_a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p',
-    createdAt: '15 Abr 2026',
-    active: false,
-  }
-])
-
-</script>
-
-<style></style>
