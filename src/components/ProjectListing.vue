@@ -1,13 +1,10 @@
 <script setup lang="ts">
 import type { Project } from '@/types/project'
-import { Plus } from '@lucide/vue'
 import { reactive } from 'vue'
-import Button from './Button.vue'
-import Container from './Container.vue'
-import Divider from './Divider.vue'
-import PageTitle from './PageTitle.vue'
 import ProjectCard from './ProjectCard.vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter();
 
 const projects = reactive<Project[]>([
   {
@@ -28,29 +25,16 @@ const projects = reactive<Project[]>([
   }
 ])
 
+const goToProject = (projectId: string) => {
+  router.push(`/projects/${projectId}`);
+}
+
 </script>
 
-
 <template>
-  <Container tag="main" class="space-y-5">
-    <div class="flex items-center justify-between">
-      <PageTitle>
-        <template #title>Seus Projetos</template>
-        <template #subtitle>Gerencie suas chaves de API e domínios.</template>
-      </PageTitle>
-      <Button>
-        <Plus class="h-4 w-4 mr-2" />
-        Novo Projeto
-      </Button>
-    </div>
-
-    <Divider />
-
-    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-      <ProjectCard v-for="project in projects" :key="project.id" :id="project.id" :name="project.name"
-        :destination-email="project.destinationEmail" :apiKey="project.apiKey" :createdAt="project.createdAt"
-        :active="project.active" />
-    </div>
-
-  </Container>
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <ProjectCard v-for="project in projects" :key="project.id" :id="project.id" :name="project.name"
+      :destination-email="project.destinationEmail" :apiKey="project.apiKey" :createdAt="project.createdAt"
+      :active="project.active" @details="goToProject" />
+  </div>
 </template>

@@ -7,6 +7,7 @@ import Container from '../components/Container.vue'
 import Divider from '../components/Divider.vue'
 import PageTitle from '../components/PageTitle.vue'
 import ProjectCard from '../components/ProjectCard.vue'
+import ProjectListing from '@/components/ProjectListing.vue'
 
 
 const projects = reactive<Project[]>([
@@ -46,11 +47,7 @@ const projects = reactive<Project[]>([
 
     <Divider />
 
-    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-      <ProjectCard v-for="project in projects" :key="project.id" :id="project.id" :name="project.name"
-        :destination-email="project.destinationEmail" :apiKey="project.apiKey" :createdAt="project.createdAt"
-        :active="project.active" />
-    </div>
+    <ProjectListing />
 
   </Container>
 </template>
