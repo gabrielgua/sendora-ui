@@ -6,13 +6,13 @@ import { ChevronRight, Home } from '@lucide/vue';
 const route = useRoute();
 
 const breadcrumbs = computed(() => {
+  const breadcrumb = route.meta.breadcrumb;
 
-  return route.matched
-    .filter(record => record.name && record.path !== '/' && record.path !== '/home')
-    .map(record => ({
-      name: String(record.name),
-      path: record.path
-    }));
+  if (!breadcrumb) return [];
+
+  return typeof breadcrumb === 'function'
+    ? breadcrumb(route)
+    : breadcrumb;
 });
 </script>
 
@@ -29,7 +29,7 @@ const breadcrumbs = computed(() => {
         </RouterLink>
       </li>
 
-      <li v-for="(crumb, index) in breadcrumbs" :key="crumb.path" class="flex items-center space-x-2">
+      <li v-for="(crumb, index) in breadcrumbs" :key="crumb.name" class="flex items-center space-x-2">
         <ChevronRight class="h-4 w-4 text-zinc-300 dark:text-zinc-700" />
 
         <span v-if="index === breadcrumbs.length - 1"
