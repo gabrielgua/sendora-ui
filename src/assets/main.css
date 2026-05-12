@@ -1,5 +1,59 @@
 @import 'tailwindcss';
+
 @custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* PRIMARY */
+  --color-primary: oklch(0.21 0 0);
+  --color-primary-hover: oklch(0.27 0 0);
+  --color-primary-foreground: oklch(1 0 0);
+
+  --color-primary-dark: oklch(0.97 0 0);
+  --color-primary-dark-hover: oklch(0.92 0 0);
+  --color-primary-dark-foreground: oklch(0.21 0 0);
+
+  /* SECONDARY */
+  --color-secondary: oklch(0.96 0 0);
+  --color-secondary-hover: oklch(0.92 0 0);
+  --color-secondary-foreground: oklch(0.21 0 0);
+
+  --color-secondary-dark: oklch(0.37 0 0);
+  --color-secondary-dark-hover: oklch(0.44 0 0);
+  --color-secondary-dark-foreground: oklch(0.97 0 0);
+
+  /* OUTLINE */
+  --color-outline-border: oklch(0.87 0 0);
+  --color-outline-border-dark: oklch(0.37 0 0);
+
+  /* GHOST */
+  --color-ghost: oklch(0.55 0 0);
+  --color-ghost-hover: oklch(0.96 0 0);
+  --color-ghost-hover-dark: oklch(0.37 0 0);
+
+  /* DANGER */
+  --color-danger: oklch(0.64 0.23 25);
+  --color-danger-hover: oklch(0.58 0.23 25);
+
+  /* SUCCESS */
+  --color-success: oklch(0.62 0.17 150);
+  --color-success-hover: oklch(0.55 0.17 150);
+
+  /* WARNING */
+  --color-warning: oklch(0.75 0.17 70);
+  --color-warning-hover: oklch(0.68 0.17 70);
+
+  /* BACKGROUND */
+  --color-background: oklch(1 0 0);
+  --color-background-dark: oklch(0.14 0 0);
+
+  /* FOREGROUND */
+  --color-foreground: oklch(0.21 0 0);
+  --color-foreground-dark: oklch(0.97 0 0);
+
+  /* RING */
+  --color-ring: oklch(0.21 0 0);
+  --color-ring-dark: oklch(0.92 0 0);
+}
 
 body {
   @apply bg-white/80 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100;

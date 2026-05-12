@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 
 interface Props {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'success' | 'warning';
   size?: 'sm' | 'md' | 'lg' | 'icon';
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
@@ -18,11 +18,13 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const variantStyles = {
-  primary: 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 shadow-sm',
-  secondary: 'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-200 dark:hover:bg-zinc-700',
-  outline: 'border border-zinc-200 dark:border-zinc-700 bg-transparent text-zinc-900 dark:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-800',
-  ghost: 'bg-transparent text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100',
-  danger: 'bg-rose-500 text-white hover:bg-rose-600 shadow-sm'
+  primary: 'bg-primary dark:bg-primary-dark text-primary-foreground dark:text-primary-dark-foreground hover:bg-primary-hover dark:hover:bg-primary-dark-hover shadow-sm',
+  secondary: 'bg-secondary dark:bg-secondary-dark text-secondary-foreground dark:text-secondary-dark-foreground hover:bg-secondary-hover dark:hover:bg-secondary-dark-hover',
+  outline: 'border border-outline-border dark:border-outline-border-dark bg-transparent text-foreground dark:text-foreground-dark hover:bg-zinc-50 dark:hover:bg-zinc-800',
+  ghost: 'bg-transparent text-foreground dark:text-foreground-dark hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-foreground-dark dark:hover:text-foreground-dark',
+  danger: 'bg-danger dark:bg-danger-hover text-white hover:bg-danger-hover shadow-sm',
+  success: 'bg-success text-white hover:bg-success-hover shadow-sm',
+  warning: 'bg-warning text-white hover:bg-warning-hover shadow-sm',
 };
 
 const sizeStyles = {
