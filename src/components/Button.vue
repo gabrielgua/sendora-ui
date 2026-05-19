@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
+export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'success' | 'warning'
+
 interface Props {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'success' | 'warning';
+  variant?: ButtonVariant;
   size?: 'sm' | 'md' | 'lg' | 'icon';
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';

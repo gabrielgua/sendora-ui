@@ -53,6 +53,10 @@
   /* RING */
   --color-ring: oklch(0.21 0 0);
   --color-ring-dark: oklch(0.92 0 0);
+
+  /* TEXT */
+  --color-text: oklch(0.21 0 0);
+  --color-text-dark: oklch(0.97 0 0);
 }
 
 body {

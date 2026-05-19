@@ -7,11 +7,11 @@ import Input from '@/components/forms/Input.vue';
 import InputGroup from '@/components/forms/InputGroup.vue';
 import Icon from '@/components/Icon.vue';
 import MetricCard from '@/components/MetricCard.vue';
+import Modal from '@/components/Modal.vue';
 import PageTitle from '@/components/PageTitle.vue';
-import { ChartColumnDecreasing, Copy, Eye, FolderKanban, Globe, Key, Mail, Plus, PlusCircle, Trash, Trash2, TriangleAlert } from '@lucide/vue';
+import { ChartColumnDecreasing, Copy, Eye, FolderKanban, Globe, Key, Mail, Trash2, TriangleAlert } from '@lucide/vue';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
-import { B } from 'vue-router/dist/index-D_VEAp3P.js';
 
 
 const route = useRoute();
@@ -31,6 +31,19 @@ const domains = ref<string[]>(['dominio.com.br', 'mydomain.com']);
 const removeDomain = (domain: string) => {
   domains.value = domains.value.filter(d => d !== domain);
 };
+
+const showDeactivateProjectModal = ref(false);
+
+const deactivateProject = () => {
+  console.log('Desativar projeto')
+  showDeactivateProjectModal.value = false;
+}
+
+const showDeleteProjectModal = ref(false);
+const deleteProject = () => {
+  console.log('Excluir projeto')
+  showDeleteProjectModal.value = false;
+}
 
 </script>
 
@@ -79,7 +92,7 @@ const removeDomain = (domain: string) => {
 
       <Card>
         <template #title-icon>
-          <Icon :icon="ChartColumnDecreasing" class="size-5 text-zinc-400 dark:text-zinc-500" />
+          <Icon :icon="ChartColumnDecreasing" class="text-zinc-400 dark:text-zinc-500" />
         </template>
         <template #title>Status Do Projeto</template>
         <template #content>
@@ -90,14 +103,14 @@ const removeDomain = (domain: string) => {
                 Ativo
               </p>
             </div>
-            <Button variant="outline" size="sm">Desativar</Button>
+            <Button variant="outline" size="sm" @click="showDeactivateProjectModal = true">Desativar</Button>
           </div>
         </template>
       </Card>
 
       <Card>
         <template #title-icon>
-          <Globe class="size-5 text-zinc-400 dark:text-zinc-500" />
+          <Icon :icon="Globe" class="text-zinc-400 dark:text-zinc-500" />
         </template>
         <template #title>Whitelist de Domínios</template>
         <template #content>
@@ -137,7 +150,7 @@ const removeDomain = (domain: string) => {
 
       <Card>
         <template #title-icon>
-          <Key class="size-5 text-zinc-400 dark:text-zinc-500" />
+          <Icon :icon="Key" class="text-zinc-400 dark:text-zinc-500" />
         </template>
         <template #title>Chaves de API</template>
         <template #content>
@@ -171,7 +184,7 @@ const removeDomain = (domain: string) => {
 
       <Card>
         <template #title-icon>
-          <TriangleAlert class="size-5 text-danger" />
+          <Icon :icon="TriangleAlert" class="text-danger" />
         </template>
         <template #title>Zona Crítica</template>
         <template #content>
@@ -179,7 +192,7 @@ const removeDomain = (domain: string) => {
             <p class="text-sm text-zinc-600 dark:text-zinc-400">
               A exclusão do projeto é permanente e não pode ser desfeita. Todos os dados serão perdidos.
             </p>
-            <Button variant="danger">
+            <Button variant="danger" @click="showDeleteProjectModal = true">
               <Icon :icon="Trash2" :size="16" class="me-2" />
               Excluir Projeto
             </Button>
@@ -188,4 +201,32 @@ const removeDomain = (domain: string) => {
       </Card>
     </section>
   </Container>
+  <Modal :show="showDeactivateProjectModal" variant="warning" @on-close="showDeactivateProjectModal = false"
+    @on-confirm="deactivateProject()" confirm-text="Sim, desativar" cancel-text="Cancelar">
+    <template #modal-title>Desativar Projeto?</template>
+    <template #modal-content>
+      <p>
+        Tem certeza de que deseja desativar este projeto?
+        <span class="font-semibold text-text! dark:text-text-dark!">
+          Não se preocupe
+        </span>, essa ação pode ser desfeita a qualquer momento.
+      </p>
+    </template>
+  </Modal>
+
+  <Modal :show="showDeleteProjectModal" variant="danger" @on-close="showDeleteProjectModal = false"
+    @on-confirm="deleteProject()" confirm-text="Sim, excluir" cancel-text="Cancelar">
+    <template #modal-title-icon>
+      <Icon :icon="TriangleAlert" class="text-danger" />
+    </template>
+    <template #modal-title>Excluir Projeto?</template>
+    <template #modal-content>
+      <p>
+        Tem certeza de que deseja excluir este projeto?
+        <span class="font-semibold text-text! dark:text-text-dark!">
+          Esta ação não pode ser desfeita.
+        </span>
+      </p>
+    </template>
+  </Modal>
 </template>
