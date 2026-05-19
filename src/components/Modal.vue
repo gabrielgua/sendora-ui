@@ -13,13 +13,13 @@ defineEmits(['on-close', 'on-confirm'])
 const props = withDefaults(defineProps<{
   show: boolean
   variant?: ModalVariant,
-  confirmationButtons?: boolean,
+  actionButtons?: boolean,
   cancelText?: string,
   confirmText?: string
 }>(), {
   show: false,
   variant: 'default',
-  confirmationButtons: true,
+  actionButtons: true,
   cancelText: 'Cancel',
   confirmText: 'Confirm'
 })
@@ -78,7 +78,7 @@ const confirmButtonVariants = new Map<ModalVariant, ButtonVariant>([
               </h2>
             </template>
 
-            <template #footer v-if="confirmationButtons">
+            <template #footer v-if="actionButtons">
               <div class="flex items-center *:grow gap-5">
                 <slot name="modal-buttons">
                   <Button variant="outline" @click="$emit('on-close')">{{ cancelText }}</Button>
