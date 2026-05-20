@@ -23,17 +23,17 @@ const variantStyles = {
   primary: 'bg-primary dark:bg-primary-dark text-primary-foreground dark:text-primary-dark-foreground hover:bg-primary-hover dark:hover:bg-primary-dark-hover shadow-sm',
   secondary: 'bg-secondary dark:bg-secondary-dark text-secondary-foreground dark:text-secondary-dark-foreground hover:bg-secondary-hover dark:hover:bg-secondary-dark-hover',
   outline: 'border border-outline-border dark:border-outline-border-dark bg-transparent text-foreground dark:text-foreground-dark hover:bg-zinc-50 dark:hover:bg-zinc-800',
-  ghost: 'bg-transparent text-foreground dark:text-foreground-dark hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-foreground-dark dark:hover:text-foreground-dark',
+  ghost: 'bg-transparent text-foreground dark:text-foreground-dark hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-foreground dark:hover:text-foreground-dark',
   danger: 'bg-danger dark:bg-danger-hover text-white hover:bg-danger-hover shadow-sm',
   success: 'bg-success text-white hover:bg-success-hover shadow-sm',
   warning: 'bg-warning text-white hover:bg-warning-hover shadow-sm',
 };
 
 const sizeStyles = {
-  sm: 'py-2 px-3 text-xs',
-  md: 'py-2.5 px-3.5 text-sm',
-  lg: 'py-3 px-6 text-base',
-  icon: 'h-9 w-9 grid place-items-center p-0'
+  sm: 'py-2 px-3 gap-2 text-xs',
+  md: 'py-2.5 px-3.5 gap-2 text-sm',
+  lg: 'py-3 px-6 gap-3 text-base',
+  icon: 'h-9 w-9 gap-3 grid place-items-center p-0'
 };
 
 const classes = computed(() => {

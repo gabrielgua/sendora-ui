@@ -9,7 +9,7 @@ import Icon from '@/components/Icon.vue';
 import MetricCard from '@/components/MetricCard.vue';
 import Modal from '@/components/Modal.vue';
 import PageTitle from '@/components/PageTitle.vue';
-import { ChartColumnDecreasing, Copy, Eye, FolderKanban, Globe, Key, Mail, Trash2, TriangleAlert } from '@lucide/vue';
+import { ChartColumnDecreasing, Copy, Eye, FolderKanban, Globe, Key, Mail, RotateCcw, Trash2, TriangleAlert } from '@lucide/vue';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -153,6 +153,12 @@ const deleteProject = () => {
           <Icon :icon="Key" class="text-zinc-400 dark:text-zinc-500" />
         </template>
         <template #title>Chaves de API</template>
+        <template #right-title-content>
+          <Button variant="ghost" size="sm">
+            <Icon :icon="RotateCcw" />
+            Gerar Nova Chave
+          </Button>
+        </template>
         <template #content>
           <div class="space-y-3">
             <p class="text-sm text-zinc-600 dark:text-zinc-400">
@@ -201,6 +207,7 @@ const deleteProject = () => {
       </Card>
     </section>
   </Container>
+
   <Modal :show="showDeactivateProjectModal" variant="warning" @on-close="showDeactivateProjectModal = false"
     @on-confirm="deactivateProject()" confirm-text="Sim, desativar" cancel-text="Cancelar">
     <template #modal-title>Desativar Projeto?</template>

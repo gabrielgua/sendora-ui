@@ -71,7 +71,7 @@ const secondaryItems = [
         </SidebarRouterLink>
 
         <SidebarRouterLink to="/logout" :icon="LogOut" :show-name="!isCollapsed"
-          class="text-danger/70! hover:text-danger/100!">
+          class="text-danger/70! hover:text-danger!">
           Sair
         </SidebarRouterLink>
       </div>
