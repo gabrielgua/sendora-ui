@@ -2,6 +2,7 @@
 import type { Project } from '@/types/project';
 import { Calendar, ChevronRight, Inbox, Mail } from '@lucide/vue';
 import Button from './Button.vue';
+import { formatDate } from '@/utils/format-date';
 
 defineProps<Project>();
 const emit = defineEmits(['details']);
@@ -52,9 +53,12 @@ const emit = defineEmits(['details']);
     </div>
 
     <div class="mt-4 flex items-center justify-between border-t border-zinc-100 dark:border-zinc-800 pt-4 gap-4">
-      <div class="flex items-center gap-1.5 text-[11px] text-zinc-400 italic">
-        <Calendar class="h-3 w-3" />
-        {{ createdAt }}
+      <div class="text-zinc-400">
+        <h2 class="text-xs">Criado em:</h2>
+        <div class="flex items-center gap-1.5 text-[11px]">
+          <Calendar class="h-3 w-3" />
+          {{ formatDate(createdAt) }}
+        </div>
       </div>
 
       <Button variant="secondary" size="sm" @click="emit('details', id)" class="group/btn grow">

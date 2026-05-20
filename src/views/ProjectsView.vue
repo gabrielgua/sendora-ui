@@ -1,34 +1,17 @@
 <script setup lang="ts">
-import type { Project } from '@/types/project'
+import ProjectListing from '@/components/ProjectListing.vue'
 import { Plus } from '@lucide/vue'
-import { reactive } from 'vue'
 import Button from '../components/Button.vue'
 import Container from '../components/Container.vue'
 import Divider from '../components/Divider.vue'
 import PageTitle from '../components/PageTitle.vue'
-import ProjectCard from '../components/ProjectCard.vue'
-import ProjectListing from '@/components/ProjectListing.vue'
+import { onMounted } from 'vue'
+import { useProjectStore } from '@/stores/project.store'
 
-
-const projects = reactive<Project[]>([
-  {
-    id: 'proj_1',
-    name: 'NWX Group',
-    destinationEmail: 'support@nwxgroup.com',
-    apiKey: 'mk_live_8f7d9a0b1c2e3f4g5h6i7j8k9l0m1n2',
-    createdAt: '23 Abr 2026',
-    active: true,
-  },
-  {
-    id: 'proj_2',
-    name: 'Landing Page Evento',
-    destinationEmail: 'help@evento.nwxgroup.com',
-    apiKey: 'mk_live_a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p',
-    createdAt: '15 Abr 2026',
-    active: false,
-  }
-])
-
+const { fetchAuthenticatedUserProjects } = useProjectStore();
+onMounted(() => {
+  fetchAuthenticatedUserProjects();
+})
 </script>
 
 
@@ -44,10 +27,7 @@ const projects = reactive<Project[]>([
         Novo Projeto
       </Button>
     </div>
-
     <Divider />
-
     <ProjectListing />
-
   </Container>
 </template>

@@ -1,6 +1,7 @@
 import { http } from '@/services/http'
 import type { ApiError } from '@/types/api-error'
 import type { Authentication } from '@/types/authentication'
+import { delay } from '@/utils/delay'
 import type { AxiosError } from 'axios'
 import { defineStore } from 'pinia'
 import { computed, reactive, ref } from 'vue'
@@ -15,8 +16,6 @@ export const useAuthStore = defineStore('auth', () => {
   const state = reactive({ loading: false, error: null as string | null })
 
   const isAuthenticated = computed(() => !!authentication.value?.token)
-
-  const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
   const authenticate = async (email: string, password: string) => {
     try {
