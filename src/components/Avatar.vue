@@ -1,29 +1,26 @@
 <script setup lang="ts">
+import { ShieldCheck } from '@lucide/vue';
 import { computed } from 'vue';
-import { ShieldCheck, User } from '@lucide/vue';
 
 interface Props {
   name: string;
   email: string;
   avatarUrl?: string;
   isAdmin?: boolean;
-  showDetails?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   isAdmin: false,
-  showDetails: true
 });
 
-// Gera iniciais caso não haja imagem
-const initials = computed(() => {
-  return props.name
-    .split(' ')
-    .map(n => n[0])
-    .join('')
-    .toUpperCase()
-    .slice(0, 2);
+const avatarUrl = computed(() => {
+  if (props.avatarUrl) {
+    return props.avatarUrl;
+  }
+
+  return `https://api.dicebear.com/9.x/glass/svg?seed=${props.name + props.email}`;
 });
+
 </script>
 
 <template>
@@ -31,10 +28,7 @@ const initials = computed(() => {
     <div class="relative shrink-0">
       <div
         class="h-9 w-9 overflow-hidden rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800">
-        <img v-if="avatarUrl" :src="avatarUrl" :alt="name" class="h-full w-full object-cover" />
-        <div v-else class="flex h-full w-full items-center justify-center text-xs font-bold text-zinc-500">
-          {{ initials }}
-        </div>
+        <img :src="avatarUrl" :alt="name" class="h-full w-full object-cover" />
       </div>
 
       <div v-if="isAdmin"
@@ -44,7 +38,7 @@ const initials = computed(() => {
       </div>
     </div>
 
-    <div v-if="showDetails" class="flex flex-col overflow-hidden transition-opacity duration-300">
+    <div class="flex flex-col overflow-hidden transition-opacity duration-300">
       <div class="flex items-center gap-1.5">
         <span class="truncate text-sm font-semibold text-zinc-900 dark:text-zinc-100">
           {{ name }}

@@ -8,17 +8,14 @@ import Button from './Button.vue';
 import ThemeSwitcher from './ThemeSwitcher.vue';
 import Divider from './Divider.vue';
 import Icon from './Icon.vue';
+import { useAuthStore } from '@/stores/auth.store';
 
 const sidebarStore = useSidebarStore();
 const isCollapsed = computed(() => sidebarStore.isCollapsed)
 
-const fakeUser = {
-  name: 'Gabriel Guaitanele',
-  email: 'gabriel.guaita45@gmail.com',
-  avatarUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=gabrielgua',
-  isAdmin: true
-}
+const authStore = useAuthStore();
 
+const authenticatedUser = computed(() => authStore.authentication?.user)
 </script>
 
 <template>
@@ -39,9 +36,9 @@ const fakeUser = {
 
 
 
-      <div class="flex items-center gap-5">
-        <Avatar :name="fakeUser.name" :email="fakeUser.email" :avatar-url="fakeUser.avatarUrl"
-          :is-admin="fakeUser.isAdmin" />
+      <div class="flex items-center gap-5" v-if="authenticatedUser">
+        <Avatar :name="authenticatedUser.name" :email="authenticatedUser.email"
+          :is-admin="authenticatedUser.role === 'ROLE_ADMIN'" />
         <Divider type="vertical" />
         <div class="flex items-center gap-2">
           <ThemeSwitcher />
