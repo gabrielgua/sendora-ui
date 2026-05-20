@@ -42,7 +42,7 @@ const authenticatedUser = computed(() => authStore.authentication?.user)
         <Divider type="vertical" />
         <div class="flex items-center gap-2">
           <ThemeSwitcher />
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" @click="authStore.logout()">
             <Icon :icon="LogOut" :size="16" />
           </Button>
         </div>

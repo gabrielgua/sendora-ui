@@ -1,3 +1,4 @@
+import { useAuthStore } from '@/stores/auth.store'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -52,6 +53,19 @@ const router = createRouter({
 
     { path: '/:pathMatch(.*)*', redirect: '/home' },
   ],
+})
+
+//redirects user based on authentication status
+router.beforeEach(async (to, _, next) => {
+  const authRoutes = ['/login', '/register']
+
+  const authStore = useAuthStore()
+
+  if (!authRoutes.includes(to.path) && !authStore.isAuthenticated) {
+    next('/login')
+  } else if (authRoutes.includes(to.path) && authStore.isAuthenticated) {
+    next('/home')
+  } else next()
 })
 
 export default router
