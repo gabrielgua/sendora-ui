@@ -55,16 +55,16 @@ const router = createRouter({
 })
 
 //redirects user based on authentication status
-router.beforeEach(async (to, _, next) => {
+router.beforeEach(async (to) => {
   const authRoutes = ['/login', '/register']
 
   const authStore = useAuthStore()
-
-  if (!authRoutes.includes(to.path) && !authStore.isAuthenticated) {
-    next('/login')
-  } else if (authRoutes.includes(to.path) && authStore.isAuthenticated) {
-    next('/home')
-  } else next()
+  const isAuthRoute = authRoutes.includes(to.path)
+  if (!isAuthRoute && !authStore.isAuthenticated) {
+    return '/login'
+  } else if (isAuthRoute && authStore.isAuthenticated) {
+    return '/home'
+  }
 })
 
 export default router
