@@ -137,7 +137,7 @@ const deleteProject = () => {
                 <li v-for="domain in domains" :key="domain"
                   class="flex items-center justify-between p-2 ps-4 bg-secondary dark:bg-background-dark rounded-2xl">
                   {{ domain }}
-                  <Button variant="outline" size="icon" @click="removeDomain(domain)"
+                  <Button variant="ghost" size="icon" @click="removeDomain(domain)"
                     class="text-danger! hover:bg-danger/10! border-danger/10!">
                     <Icon :icon="Trash2" />
                   </Button>

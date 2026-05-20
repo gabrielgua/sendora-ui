@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { Moon, Sun } from '@lucide/vue'
 import { useDark, useToggle } from '@vueuse/core'
-import { computed } from 'vue'
 import Button from './Button.vue'
 
 const isDark = useDark({ selector: 'html' })

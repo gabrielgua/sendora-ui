@@ -1,12 +1,13 @@
 <script lang="ts" setup>
 import { useSidebarStore } from '@/stores/sidebar.store';
-import { PanelRightCloseIcon, PanelRightOpen } from '@lucide/vue';
+import { LogOut, PanelRightCloseIcon, PanelRightOpen } from '@lucide/vue';
 import { computed } from 'vue';
 import Avatar from './Avatar.vue';
 import Breadcrumbs from './Breadcrumbs.vue';
 import Button from './Button.vue';
 import ThemeSwitcher from './ThemeSwitcher.vue';
 import Divider from './Divider.vue';
+import Icon from './Icon.vue';
 
 const sidebarStore = useSidebarStore();
 const isCollapsed = computed(() => sidebarStore.isCollapsed)
@@ -39,10 +40,15 @@ const fakeUser = {
 
 
       <div class="flex items-center gap-5">
-        <ThemeSwitcher />
-        <Divider type="vertical" />
         <Avatar :name="fakeUser.name" :email="fakeUser.email" :avatar-url="fakeUser.avatarUrl"
           :is-admin="fakeUser.isAdmin" />
+        <Divider type="vertical" />
+        <div class="flex items-center gap-2">
+          <ThemeSwitcher />
+          <Button variant="ghost" size="icon">
+            <Icon :icon="LogOut" :size="16" />
+          </Button>
+        </div>
       </div>
     </nav>
   </header>
