@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import HomeDashboard from '@/components/HomeDashboard.vue';
-import { ArrowRight, LayoutDashboard } from '@lucide/vue';
-import Button from '../components/Button.vue';
-import Divider from '../components/Divider.vue';
-import PageTitle from '../components/PageTitle.vue';
-import SectionTitle from '../components/SectionTitle.vue';
-import HomeRecentProjectsListing from '@/components/HomeRecentProjectsListing.vue';
-
+import HomeDashboard from "@/components/HomeDashboard.vue";
+import { ArrowRight, LayoutDashboard } from "@lucide/vue";
+import Button from "../components/Button.vue";
+import Divider from "../components/Divider.vue";
+import PageTitle from "../components/PageTitle.vue";
+import SectionTitle from "../components/SectionTitle.vue";
+import HomeRecentProjectsListing from "@/components/HomeRecentProjectsListing.vue";
 </script>
 
 <template>
@@ -44,7 +43,7 @@ import HomeRecentProjectsListing from '@/components/HomeRecentProjectsListing.vu
 
       <Divider />
 
-      <HomeRecentProjectsListing />
+      <!-- <HomeRecentProjectsListing /> -->
     </section>
   </div>
 </template>

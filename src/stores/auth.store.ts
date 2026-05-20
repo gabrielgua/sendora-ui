@@ -86,7 +86,7 @@ export const useAuthStore = defineStore('auth', () => {
       return
     }
 
-    if (error.error === 'TOKEN_EXPIRED') {
+    if (error.error === 'TOKEN_EXPIRED' || error.error === 'TOKEN_INVALID') {
       state.error = 'Sua sessão expirou, por favor, faça login novamente.'
       return
     }

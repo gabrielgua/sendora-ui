@@ -7,6 +7,7 @@ import { useAuthStore } from './auth.store'
 export const useProjectStore = defineStore('project', () => {
   const PROJECTS_ENDPOINT = '/projects'
   const projects = ref<Project[]>([])
+  const selectedProject = ref<Project | null>(null)
   const authStore = useAuthStore()
   const state = reactive({ loading: false, error: null as string | null })
 
@@ -17,7 +18,6 @@ export const useProjectStore = defineStore('project', () => {
         `${PROJECTS_ENDPOINT}?userId=${authStore.authentication?.user?.id}`,
       )
       projects.value = response.data
-      console.log('Fetched projects:', projects.value)
     } catch (err) {
       state.error = 'Failed to fetch projects'
     } finally {
@@ -25,5 +25,22 @@ export const useProjectStore = defineStore('project', () => {
     }
   }
 
-  return { projects, state, fetchAuthenticatedUserProjects }
+  const fetchProjectById = async (projectId: string) => {
+    if (selectedProject.value?.id === projectId) {
+      return
+    }
+
+    try {
+      state.loading = true
+      const response = await http.get(`${PROJECTS_ENDPOINT}/${projectId}`)
+      selectedProject.value = response.data
+      console.log('Fetched project:', selectedProject.value)
+    } catch (err) {
+      state.error = 'Failed to fetch project'
+    } finally {
+      state.loading = false
+    }
+  }
+
+  return { projects, selectedProject, state, fetchAuthenticatedUserProjects, fetchProjectById }
 })
